@@ -59,9 +59,14 @@ class GameViewModel : ViewModel() {
     private lateinit var currentWord: String
 
     init {
+        Log.d("GameFragment", "GameViewModel created!")
         getNextWord()
     }
 
+    override fun onCleared() {
+        super.onCleared()
+        Log.d("GameFragment", "GameViewModel destroyed!")
+    }
     /*
      * Updates currentWord and currentScrambledWord with the next word.
      */
