@@ -49,7 +49,8 @@ class GameFragment : Fragment() {
         // Inflate the layout XML file and return a binding object instance
         binding = DataBindingUtil.inflate(inflater, R.layout.game_fragment, container, false)
         binding = GameFragmentBinding.inflate(inflater, container, false)
-        Log.d("GameFragment", "GameFragment created/re-created!")
+        Log.d("GameFragment",  "Word: ${viewModel.currentScrambledWord} " +
+                "Score: ${viewModel.score} WordCount: ${viewModel.currentWordCount}")
         return binding.root
     }
 
@@ -131,6 +132,7 @@ class GameFragment : Fragment() {
     private fun restartGame() {
         viewModel.reinitializeData()
         setErrorTextField(false)
+        updateNextWordOnScreen()
     }
 
     /*
