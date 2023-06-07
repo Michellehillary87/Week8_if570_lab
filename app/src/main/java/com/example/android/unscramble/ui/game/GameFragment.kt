@@ -101,6 +101,7 @@ class GameFragment : Fragment() {
     private fun onSkipWord() {
         if (viewModel.nextWord()) {
             setErrorTextField(false)
+            updateNextWordOnScreen()
         } else {
             showFinalScoreDialog()
         }
