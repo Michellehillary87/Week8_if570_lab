@@ -75,16 +75,15 @@ class GameFragment : Fragment() {
     * After the last word, the user is shown a Dialog with the final score.
     */
     private fun onSubmitWord() {
-        val playerWord = binding.textInputEditText.text.toString()
-
-        if (viewModel.isUserWordCorrect(playerWord)) {
-            setErrorTextField(false)
-            if (!viewModel.nextWord()) {
-                showFinalScoreDialog()
-            }
+        if (viewModel.nextWord()) {
+            updateNextWordOnScreen()
         } else {
-            setErrorTextField(true)
+            showFinalScoreDialog()
         }
+    }
+
+    private fun updateNextWordOnScreen() {
+        TODO("Not yet implemented")
     }
 
     /*
@@ -106,7 +105,7 @@ class GameFragment : Fragment() {
     private fun showFinalScoreDialog() {
         MaterialAlertDialogBuilder(requireContext())
                 .setTitle(getString(R.string.congratulations))
-                .setMessage(getString(R.string.you_scored, viewModel.score.value))
+                .setMessage(getString(R.string.you_scored, viewModel.score))
                 .setCancelable(false)
                 .setNegativeButton(getString(R.string.exit)) { _, _ ->
                     exitGame()
