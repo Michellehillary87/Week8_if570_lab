@@ -54,6 +54,7 @@ class GameFragment : Fragment() {
         return binding.root
     }
 
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -68,11 +69,7 @@ class GameFragment : Fragment() {
         // Setup a click listener for the Submit and Skip buttons.
         binding.submit.setOnClickListener { onSubmitWord() }
         binding.skip.setOnClickListener { onSkipWord() }
-        viewModel.currentWordCount.observe(viewLifecycleOwner,
-            { newWordCount ->
-                binding.wordCount.text =
-                    getString(R.string.word_count, newWordCount, MAX_NO_OF_WORDS)
-            })
+
     }
 
     /*
@@ -145,10 +142,6 @@ class GameFragment : Fragment() {
         activity?.finish()
     }
 
-    override fun onDetach() {
-        super.onDetach()
-        Log.d("GameFragment", "GameFragment destroyed!")
-    }
 
     /*
     * Sets and resets the text field error status.
