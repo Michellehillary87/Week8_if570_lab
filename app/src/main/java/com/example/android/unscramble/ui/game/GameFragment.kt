@@ -68,6 +68,11 @@ class GameFragment : Fragment() {
         // Setup a click listener for the Submit and Skip buttons.
         binding.submit.setOnClickListener { onSubmitWord() }
         binding.skip.setOnClickListener { onSkipWord() }
+        viewModel.currentWordCount.observe(viewLifecycleOwner,
+            { newWordCount ->
+                binding.wordCount.text =
+                    getString(R.string.word_count, newWordCount, MAX_NO_OF_WORDS)
+            })
     }
 
     /*
@@ -81,8 +86,6 @@ class GameFragment : Fragment() {
         if (viewModel.isUserWordCorrect(playerWord)) {
             setErrorTextField(false)
             if (viewModel.nextWord()) {
-                updateNextWordOnScreen()
-            } else {
                 showFinalScoreDialog()
             }
         } else {
@@ -114,7 +117,7 @@ class GameFragment : Fragment() {
     private fun showFinalScoreDialog() {
         MaterialAlertDialogBuilder(requireContext())
                 .setTitle(getString(R.string.congratulations))
-                .setMessage(getString(R.string.you_scored, viewModel.score))
+                .setMessage(getString(R.string.you_scored, viewModel.score.value))
                 .setCancelable(false)
                 .setNegativeButton(getString(R.string.exit)) { _, _ ->
                     exitGame()
@@ -160,4 +163,10 @@ class GameFragment : Fragment() {
             binding.textInputEditText.text = null
         }
     }
+}
+
+
+
+private fun String.observe() {
+    TODO("Not yet implemented")
 }
